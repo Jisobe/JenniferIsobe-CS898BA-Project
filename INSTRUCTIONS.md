@@ -1,4 +1,5 @@
 # CS 898BA: Course Project Requirement Synopsis
+
 Instructions from `https://github.com/codyfarlow1/CS898BA-PROJECT.git`
 
 Contact me with questions, comments, or concerns: cody.farlow@wichita.edu
@@ -15,7 +16,7 @@ As this is an online course, all project milestones, deliverables, and presentat
 
 ## Project Milestones & Required Content
 
-### 1. Project Pitch & Scope Approval 
+### 1. Project Pitch & Scope Approval
 * **Objective:** Proposal of your project concept, target dataset, and core methodology.
 * **Required Presentation Content:**
     * **Literature Review (Preliminary):** A brief survey of existing approaches to your chosen problem.
@@ -25,7 +26,7 @@ As this is an online course, all project milestones, deliverables, and presentat
 * **Approval Gate:** You must receive explicit instructor approval on your project pitch before beginning any development work.
 * **Scope Adjustment:** During this review, the instructor may add or reduce complexity to ensure the project is appropriately scaled for a single-semester graduate-level course. If a project is deemed too straightforward, additional requirements may be introduced; if it is too broad, the scope may be scaled back.
 
-### 2. Midterm Progress Report & Presentation 
+### 2. Midterm Progress Report & Presentation
 * **Objective:** Demonstrate initial progress, baseline validation, and proof of concept.
 * **Required Presentation Content:**
     * **Condensed Lit Review:** An updated, synthesized summary of the core papers influencing your implementation.
@@ -33,7 +34,7 @@ As this is an online course, all project milestones, deliverables, and presentat
     * **Baseline Implementation:** Preliminary results from your initial model execution.
     * **Roadblocks & Pivots:** Discussion of unexpected technical challenges and how you adjusted your design or alternative options to address them.
 
-### 3. Final Presentation & Demonstration 
+### 3. Final Presentation & Demonstration
 * **Objective:** Showcase the completed, optimized application and defend your engineering decisions.
 * **Required Presentation Content:**
     * **Final Architecture & Design:** A complete walkthrough of the finalized computer vision pipeline.
