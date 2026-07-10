@@ -34,3 +34,16 @@ While this project is part of a computer vision course and will focus on the com
 
 * iPhone 15 Pro Camera: Used in the photo setting to capture images of dice. Each image contains 5 dice in various lightings including bright, medium, and low. The lighting was also placed at different angles in reference to the dice to give different shadow and lighting effects. The camera was places at one of 3 angels: roughly 90 degrees (straight above the dice), 55 degree, and 35 degrees. Images were saved in the JPEG format and are located in *./data/raw*
 * Roboflow: Used to label the images. Each dice in each image was bounded with the bounding tool and then label with a class with values 1, 2, 3, 4, 5, or 6 based on the face up value of the dice. After labeling the images, they were added to a dataset and divided into training, validation, and test sets using a 70-20-10 split. The dataset was then exported in the YOLOv8 format and download then saved under *./data/labeled*
+
+## crop_script.py
+
+Used to crop each labeled die from the yolo images and save the new cropped images for training.
+YOLO images can be used directly when using the YOLO model, cropped images are used for custom model training.
+
+### Running the script
+
+```bash
+uv run crop_script.py
+```
+
+TODO: Add options and descriptions
