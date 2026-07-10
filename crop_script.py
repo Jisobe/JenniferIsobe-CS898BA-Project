@@ -149,7 +149,7 @@ def process_split(
 
     return counts, skipped, errors
 
-def print_summary(split_name, counts, skipped, errors):
+def print_summary(counts, skipped, errors):
     total = sum(counts.values())
 
     print(f"\n{'  Class':<8} {'  Crops':>6}")
@@ -165,7 +165,7 @@ def print_summary(split_name, counts, skipped, errors):
     if errors > 0:
         print(f"{errors} image(s) had read errors")
 
-    counts_list = [v for v in counts.values() if v > 0]
+    counts_list = [value for value in counts.values() if value > 0]
     if counts_list:
         max_count = max(counts_list)
         min_count = min(counts_list)
@@ -228,10 +228,10 @@ def main():
 
         if result:
             counts, skipped, errors = result
-            print_summary(output_split, counts, skipped, errors)
+            print_summary(counts, skipped, errors)
     print("\n")
     print("=" * 50)
-    print("  Done. Cropped dataset ready at:", args.output)
+    print("  Script complete. Cropped dataset ready at:", args.output)
     print("=" * 50)
 
 if __name__ == "__main__":
