@@ -140,3 +140,7 @@ Uses multiple cameras to combat poor lighting and uses MSER detector.
 - <https://arxiv.org/abs/2506.07830>
 - <https://pmc.ncbi.nlm.nih.gov/articles/PMC9016506/>
 - <https://pmc.ncbi.nlm.nih.gov/articles/PMC9869388/>
+
+## Useful documentation
+
+Ultralytics Yolo: <https://docs.ultralytics.com>

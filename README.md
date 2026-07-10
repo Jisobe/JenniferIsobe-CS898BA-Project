@@ -29,3 +29,8 @@ While this project is part of a computer vision course and will focus on the com
 * Digital dice for those who cannot roll (or maybe a mechanism for rolling the physical dice for them like a conveyor belt and dice tower). The digital dice runs the risk of making it feel too online
   * Mechanism to separate the kept dice from re-roll dice
   * Mechanism to collect the dice for re-rolling
+
+## Tools used
+
+* iPhone 15 Pro Camera: Used in the photo setting to capture images of dice. Each image contains 5 dice in various lightings including bright, medium, and low. The lighting was also placed at different angles in reference to the dice to give different shadow and lighting effects. The camera was places at one of 3 angels: roughly 90 degrees (straight above the dice), 55 degree, and 35 degrees. Images were saved in the JPEG format and are located in *./data/raw*
+* Roboflow: Used to label the images. Each dice in each image was bounded with the bounding tool and then label with a class with values 1, 2, 3, 4, 5, or 6 based on the face up value of the dice. After labeling the images, they were added to a dataset and divided into training, validation, and test sets using a 70-20-10 split. The dataset was then exported in the YOLOv8 format and download then saved under *./data/labeled*
