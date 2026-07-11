@@ -4,8 +4,9 @@ import argparse
 import cv2 as cv
 from pathlib import Path
 
-YOLO_DATASET_DIR  = "data/labeled" # Directory where the YOLO dataset was exported from Roboflow
-OUTPUT_DIR   = "data/cropped"      # Directory where cropped dice images are saved
+CURRENT_DIR = Path.cwd()
+YOLO_DATASET_DIR  = CURRENT_DIR / "data/labeled" # Directory where the YOLO dataset was exported from Roboflow
+OUTPUT_DIR   = CURRENT_DIR / "data/cropped"      # Directory where cropped dice images are saved
 PADDING_PX   = 8                   # Pixels of padding around each crop. Adjust to ensure edges are not cut off
 OUTPUT_SIZE  = 64                  # Cropped image resize dimension in px. Results in an image of size OUTPUT_SIZE x OUTPUT_SIZE
 
