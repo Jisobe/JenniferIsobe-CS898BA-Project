@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, Dataset
-from torchvision import transforms
+from torchvision.transforms import v2
 from PIL import Image
 import os
 import json
@@ -76,27 +76,29 @@ class DiceDataset(Dataset):
         return image, label
 
 #
-training_data_transform = transforms.Compose([
-    transforms.Resize((IMG_SIZE, IMG_SIZE)),
-    transforms.RandomRotation(360),     # Add rotation invariance. Allows 360 degrees of rotation of original image
-    transforms.ColorJitter(            # Add lighting variation simulations
+training_data_transform = v2.Compose([
+    v2.Resize((IMG_SIZE, IMG_SIZE)),
+    v2.RandomRotation(360),     # Add rotation invariance. Allows 360 degrees of rotation of original image
+    v2.ColorJitter(            # Add lighting variation simulations
         brightness=0.3,
         contrast=0.3,
         saturation=0.2
     ),
-    transforms.ToTensor(),
-    transforms.Normalize(
-        mean=[0.485, 0.456, 0.406],
-        std=[0.229, 0.224, 0.225]
+    v2.ToImage(),
+    v2.ToDtype(torch.float32, scale=True),
+    v2.Normalize(
+        mean = [0.5096, 0.4681, 0.3996],
+        std  = [0.2762, 0.2643, 0.2510]
     )
 ])
 
-validation_data_transform = transforms.Compose([
-    transforms.Resize((IMG_SIZE, IMG_SIZE)),
-    transforms.ToTensor(),
-    transforms.Normalize(
-        mean=[0.485, 0.456, 0.406],
-        std=[0.229, 0.224, 0.225]
+validation_data_transform = v2.Compose([
+    v2.Resize((IMG_SIZE, IMG_SIZE)),
+    v2.ToImage(),
+    v2.ToDtype(torch.float32, scale=True),
+    v2.Normalize(
+        mean = [0.5096, 0.4681, 0.3996],
+        std  = [0.2762, 0.2643, 0.2510]
     )
 ])
 

@@ -74,6 +74,26 @@ cosine_decay_learning_rate {
 - Date: 2020
 - [Source](https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10#8-use-your-newly-trained-object-detection-classifier)
 
+## dice-scores-recognition
+
+- Author: ordovas
+- Date: 2020
+- [Source](https://github.com/ordovas/dice-scores-recognition)
+
+## tensorflow-dice-detection
+
+- Author: debuglevel
+- Date: 2019
+- [Source](https://github.com/debuglevel/tensorflow-dice-detection)
+
+***Fork from nell-byler/dice_detection***
+
+## A Two Stage Stage Approach to Counting Dice Values with Tensorflow and Pytorch
+
+- Author: Michael Sugimura
+- Date: 11/12/2018
+- [Source](https://towardsdatascience.com/a-two-stage-stage-approach-to-counting-dice-values-with-tensorflow-and-pytorch-e5620e5fa0a3/)
+
 ## Leveraging assistive technology for visually impaired people through optimal deep transfer learning based object detection model
 
 - Authors: Mahir Mohammed Sharif Adam, Nojood O Aljehane, Mohammed Yahya Alzahrani, Samah Al Zanin
@@ -101,30 +121,66 @@ This goes into way that assistive technology solutions and approaches can be cat
 
 ***Maybe out of date***
 
-Discusses dice location and number detection. Uses color chroma-keying: RGB is converted to HSV then cartisean values.
+Discusses dice location and number detection. Uses color chroma-keying: RGB is converted to HSV then cartesian values. Color differences are then calculated to create a mask. This process is done first for the dice and then the pips on the dice.
 
 ## An Auto-Recognizing System for Dice Games Using a Modified Unsupervised Grey Clustering Algorithm
 
 - Author: Kuo-Yi Huang
 - Date: 2/21/2008
 - [Source](https://pmc.ncbi.nlm.nih.gov/articles/PMC3927534/)
+- Goal: "employ image processing techniques, and the modified unsupervised grey clustering algorithm (MUGCA) to estimate the location of each die and identify the spot number accurately and effectively"
 
-Maybe out of date
+***Maybe out of date***
 
-Discusses recognizing score of dice using MUGCA. Identifies location and pips
+Images are captured using a monochrome camera with light intensity and image size preset. Dice location is determined through location of the pips. Dice pips are identified and isolated using modified unsupervised grey clustering. This technique works for multiple dice in the image and can identify the dice location and value even if the dice are touching/very close to each other. Image analysis uses the following: binary operator, hole-filling, remove noise using closing and opening, compute the coordinates of dice spots. Because it is unsupervised, there is no labeled data or templates that need to be used for training.
+
+The idea of unsupervised learning is interesting but with this particular approach, conditions are very strict which is not ideal for RollCall.
 
 ## Dice Recognition in Uncontrolled Illumination Conditions by Local Invariant Features
 
 - Authors: Gee-Sern Hsu, Hsiao-Chia Peng, Chyi-Yeu Lin, Pendry Alexandra
 - Date: 2011
 - [Source](https://link.springer.com/chapter/10.1007/978-3-642-23678-5_21)
+- Goal: Recognize the number of pips on dice in general table games in environments where lighting is not controlled
 
-Uses multiple cameras to combat poor lighting and uses MSER detector.
+Dice is detected using a multi-scale Harris-Hessian detector and pips are detected using MSER. MSER uses binarization and thresholding to determine regions of similarity that would indicate pips. MSER can also detect partial regions if part of the image is not segmented properly. K means is then used to identify the groups of pips.
 
-## Other Computer Vision applications for assistive technology
+This is very good for considering different lighting situations but does not address various camera angles.
+
+## A Multi-Scale Convolutional Neural Network for Rotation-Invariant Recognition
+
+- Author: Hong, Tzung-Pei, Ming-Jhe Hu, Tang-Kai Yin, and Shyue-Liang Wang
+- Date: 2/21/2022
+- [Source](https://www.mdpi.com/2079-9292/11/4/661)
+
+## Developing efficient transfer learning strategies for robust scene recognition in mobile robotics using pre-trained convolutional neural networks
+
+- Author: Hermann Baumgartl, Ricardo Buettner
+- Date: 7/23/2021
+- [Source]([A Multi-Scale Convolutional Neural Network for Rotation-Invariant Recognition](https://arxiv.org/pdf/2107.11187))
+
+## Evaluating color texture descriptors under large variations of controlled lighting conditions
+
+- Author: Claudio Cusano, Paolo Napoletano, Raimondo Schettini
+- Date: 5/8/2015
+- [Source](https://arxiv.org/pdf/1508.01108)
+
+## YOLO-MS: Rethinking Multi-Scale Representation Learning for Real-time Object Detection
+
+- Author: Yuming Chen, Xinbin Yuan, Jiabao Wang, Ruiqi Wu, Xiang Li, Qibin Hou, Qibin Hou, Ming-Ming Cheng
+- Date: 2/20/2025
+- [Source](https://arxiv.org/pdf/2308.05480)
+
+## Additional Article/Resources
+
+These articles are less technical in nature and go more into assistive technologies and their impact as well as important considerations for assistive technology
 
 - [Assistive Technology for Seniors with Low Vision: Essential Daily Living Solutions That Restore Independence](https://nelowvision.com/assistive-technology-for-seniors-with-low-vision-essential-daily-living-solutions-that-restore-independence/)
 - [Advancements in Assistive Technology for Low Vision](https://nelowvision.com/advancements-in-assistive-technology-for-low-vision/)
+- [AI, aging well, and accessible digital games: the supplemental role of AI in accessible game design for older adults](https://academic.oup.com/gerontologist/advance-article/doi/10.1093/geront/gnag055/8662825?guestAccessKey=)
+- [Integrating Artificial Intelligence as Assistive Technology for Older Adult Gamers: A Pilot Study](https://arxiv.org/abs/2506.07830)
+- [The Effectiveness of Assistive Technologies for Older Adults and the Influence of Frailty: Systematic Literature Review of Randomized Controlled Trials](https://pmc.ncbi.nlm.nih.gov/articles/PMC9016506/)
+- [Discernment on assistive technology for the care and support requirements of older adults and differently-abled individuals](https://pmc.ncbi.nlm.nih.gov/articles/PMC9869388/)
 
 ## Datasets
 
@@ -164,15 +220,11 @@ Uses multiple cameras to combat poor lighting and uses MSER detector.
   - HoughCircles
   - image preprocessing
 - YOLO/CNN
-- <https://academic.oup.com/gerontologist/advance-article/doi/10.1093/geront/gnag055/8662825?guestAccessKey=>
-- <https://arxiv.org/abs/2506.07830>
-- <https://pmc.ncbi.nlm.nih.gov/articles/PMC9016506/>
-- <https://pmc.ncbi.nlm.nih.gov/articles/PMC9869388/>
+- Pytorch
 
 ## Useful documentation
 
-Ultralytics Yolo: <https://docs.ultralytics.com>
-Pytorch torch.nn:
-    - <https://docs.pytorch.org/docs/2.13/nn.html>
-    - <https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html>
-TorchVision: <https://docs.pytorch.org/vision/stable/index.html>
+[Ultralytics Yolo](https://docs.ultralytics.com)
+[Pytorch torch.nn](https://docs.pytorch.org/docs/2.13/nn.html)
+[Pytorch torch.nn model building](https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html)
+[TorchVision](https://docs.pytorch.org/vision/stable/index.html)
