@@ -633,6 +633,8 @@ name = "jenniferisobe-cs898ba-project"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "ipykernel" },
+    { name = "ipywidgets" },
     { name = "jupyter" },
     { name = "matplotlib" },
     { name = "numpy" },
@@ -643,6 +645,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "ipykernel", specifier = ">=7.3.0" },
+    { name = "ipywidgets", specifier = ">=8.1.8" },
     { name = "jupyter", specifier = ">=1.1.1" },
     { name = "matplotlib", specifier = ">=3.11.0" },
     { name = "numpy", specifier = ">=2.5.1" },

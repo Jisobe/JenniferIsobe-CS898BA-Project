@@ -248,3 +248,22 @@ video input approaches could be useful as they could have blurrier images.
 output metrics: F-1 curve, Precision recall curve, Precision Confidence curve, recall confidence curve, confusion matrix, confusion matrix normalized
 
 adaptive bilateral filtering (ABF), Faster R-CNN with region proposal network (RPN), Hiking optimization algorithms (HOA), ResNet, DenseNet-201
+
+## Locate Dice tuning
+
+### Dark dice light background
+
+--- paste into locate_dice.py ---
+BLUR_KERNEL = (5, 5)
+SIGMA = 0.5
+CLAHE_CLIP_LIMIT = 2.0
+CLAHE_TILE_GRID = (8, 8)
+MORPH_KERNEL_SIZE = (5, 5)
+MIN_AREA_FRACTION = 0.0014999999999999998
+MAX_AREA_FRACTION = 0.1
+MIN_ASPECT_RATIO = 0.44999999999999996
+MAX_ASPECT_RATIO = 2.2
+MIN_SOLIDITY = 0.75
+CHANNEL = "saturation"
+# morph_iterations = 1 (not currently a locate_dice.py constant --
+# add one if you want to tune this too)
