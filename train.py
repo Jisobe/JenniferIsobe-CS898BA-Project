@@ -128,7 +128,7 @@ validation_losses = []
 training_accuracies = []
 validation_accuracies = []
 
-assert PATIENCE > 2 * 5 + 2, "Early stopping patience too low - will interfere with LR scheduler"
+assert PATIENCE > 2 * scheduler.patience + scheduler.cooldown, "Early stopping patience too low - will interfere with LR scheduler"
 
 for epoch in range(EPOCHS):
 # ========== Training ==========

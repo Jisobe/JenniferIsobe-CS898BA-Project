@@ -13,12 +13,12 @@ MAX_AREA_FRACTION = 0.10
 MIN_ASPECT_RATIO = 0.45
 MAX_ASPECT_RATIO = 2.2
 MIN_SOLIDITY = 0.75
-# CHANNEL = "l"
-CHANNEL = "saturation"
+CHANNEL = "l"
+# CHANNEL = "saturation"
 VALID_CHANNELS = ("l", "saturation")
 CURRENT_DIR = Path.cwd()
-OUTPUT_DIR = CURRENT_DIR / "runs/localization/run_6"
-IMAGE_DIR = CURRENT_DIR / "data/raw/d6_ - 8.jpeg"
+OUTPUT_DIR = CURRENT_DIR / "runs/localization/run_7"
+IMAGE_DIR = CURRENT_DIR / "data/raw/d6_ - 67.jpeg"
 DEBUG = True
 
 def contour_solidity(contour):
