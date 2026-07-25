@@ -52,7 +52,7 @@ def filter_dice_contours(contours, image_area):
 
 def locate_dice(image_bgr, debug=False):
     image_area = image_bgr.shape[0] * image_bgr.shape[1]
-    blurred = cv.GaussianBlur(image_area, BLUR_KERNEL, SIGMA)
+    blurred = cv.GaussianBlur(image_bgr, BLUR_KERNEL, SIGMA)
     clahe = cv.createCLAHE(clipLimit=CLAHE_CLIP_LIMIT, tileGridSize=CLAHE_TILE_GRID)
     if CHANNEL == "l":
         lab = cv.cvtColor(blurred, cv.COLOR_BGR2LAB)
@@ -68,8 +68,9 @@ def locate_dice(image_bgr, debug=False):
     contours, _ = cv.findContours(closed, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
     boxes = filter_dice_contours(contours, image_area)
     circled = image_bgr.copy()
+    hsv = cv.cvtColor(blurred, cv.COLOR_BGR2HSV)
     circles = cv.HoughCircles(
-        threshold,
+        cv.cvtColor(hsv, cv.COLOR_BGR2GRAY),
         cv.HOUGH_GRADIENT,
         dp=1,
         minDist=image_bgr.shape[0]/85,

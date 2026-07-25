@@ -16,12 +16,12 @@ import numpy as np
 
 
 CURRENT_DIR = Path.cwd()
-OUTPUT_DIR = CURRENT_DIR / "runs/localization/latest/run_737"
+OUTPUT_DIR = CURRENT_DIR / "runs/localization/manual/run_3"
 HSV_DIR = OUTPUT_DIR / "hsv"
 LAB_DIR = OUTPUT_DIR / "lab"
 ANNOTATED_DIR = OUTPUT_DIR / "annotated"
 EDGES_DIR = OUTPUT_DIR / "edges"
-IMAGE_DIR = CURRENT_DIR / "data/raw/d6_ - 737.jpeg"
+IMAGE_DIR = CURRENT_DIR / "data/raw/d6_ - 3.jpeg"
 DEBUG = True
 MIN_AREA_FRACTION = 0.0015
 MAX_AREA_FRACTION = 0.10

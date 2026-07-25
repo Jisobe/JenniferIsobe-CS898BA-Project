@@ -15,8 +15,8 @@ from cnn_dice_detection_model import DiceClassifier
 CLASS_NAMES = ["1", "2", "3", "4", "5", "6"]
 IMG_SIZE = 64
 CURRENT_DIR = Path.cwd()
-OUTPUT_DIR = CURRENT_DIR / "runs/pipeline/run_0"
-IMAGE_DIR = CURRENT_DIR / "data/raw/d6_ - 67.jpeg"
+OUTPUT_DIR = CURRENT_DIR / "runs/pipeline/run_1"
+IMAGE_DIR = CURRENT_DIR / "data/raw/d6_ - 1.jpeg"
 MODEL_PATH = CURRENT_DIR / "runs/custom/run_19/best_model.pt"
 NORM_MEAN = [0.5096, 0.4681, 0.3996]
 NORM_STD = [0.2762, 0.2643, 0.2510]
