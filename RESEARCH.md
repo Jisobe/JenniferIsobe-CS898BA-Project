@@ -265,5 +265,9 @@ MIN_ASPECT_RATIO = 0.44999999999999996
 MAX_ASPECT_RATIO = 2.2
 MIN_SOLIDITY = 0.75
 CHANNEL = "saturation"
-# morph_iterations = 1 (not currently a locate_dice.py constant --
-# add one if you want to tune this too)
+morph_iterations = 1
+
+### Knowns
+
+- number of dice: first roll: 5; subsequent rolls: previous roll - kept
+-

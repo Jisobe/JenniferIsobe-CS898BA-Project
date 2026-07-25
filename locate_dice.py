@@ -17,8 +17,8 @@ CHANNEL = "l"
 # CHANNEL = "saturation"
 VALID_CHANNELS = ("l", "saturation")
 CURRENT_DIR = Path.cwd()
-OUTPUT_DIR = CURRENT_DIR / "runs/localization/run_10"
-IMAGE_DIR = CURRENT_DIR / "data/raw/d6_ - 8.jpeg"
+OUTPUT_DIR = CURRENT_DIR / "runs/localization/run_11"
+IMAGE_DIR = CURRENT_DIR / "data/raw/d6_ - 7.jpeg"
 DEBUG = True
 
 def contour_solidity(contour):
@@ -52,20 +52,16 @@ def filter_dice_contours(contours, image_area):
 
 def locate_dice(image_bgr, debug=False):
     image_area = image_bgr.shape[0] * image_bgr.shape[1]
-    grey = cv.cvtColor(image_bgr, cv.COLOR_BGR2GRAY)
-    # blurred = cv.GaussianBlur(grey, BLUR_KERNEL, SIGMA)
-    blurred = cv.medianBlur(grey,7)
-    # clahe = cv.createCLAHE(clipLimit=CLAHE_CLIP_LIMIT, tileGridSize=CLAHE_TILE_GRID)
-    # if CHANNEL == "l":
-    #     lab = cv.cvtColor(blurred, cv.COLOR_BGR2LAB)
-    #     raw_channel, _, _ = cv.split(lab)
-    # else:
-    #     hsv = cv.cvtColor(blurred, cv.COLOR_BGR2HSV)
-    #     _, raw_channel, _ = cv.split(hsv)
-    # normalized_channel = clahe.apply(raw_channel)
-    # _, threshold = cv.threshold(normalized_channel, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
-    _, threshold = cv.threshold(blurred, 130, 255, cv.THRESH_BINARY)
-    edges = cv.Canny(blurred,threshold1=25, threshold2=50, apertureSize=3)
+    blurred = cv.GaussianBlur(image_area, BLUR_KERNEL, SIGMA)
+    clahe = cv.createCLAHE(clipLimit=CLAHE_CLIP_LIMIT, tileGridSize=CLAHE_TILE_GRID)
+    if CHANNEL == "l":
+        lab = cv.cvtColor(blurred, cv.COLOR_BGR2LAB)
+        raw_channel, _, _ = cv.split(lab)
+    else:
+        hsv = cv.cvtColor(blurred, cv.COLOR_BGR2HSV)
+        _, raw_channel, _ = cv.split(hsv)
+    normalized_channel = clahe.apply(raw_channel)
+    _, threshold = cv.threshold(normalized_channel, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
     kernel = cv.getStructuringElement(cv.MORPH_ELLIPSE, MORPH_KERNEL_SIZE)
     opened = cv.morphologyEx(threshold, cv.MORPH_OPEN, kernel, iterations=3)
     closed = cv.morphologyEx(opened, cv.MORPH_CLOSE, kernel, iterations=3)
@@ -94,9 +90,7 @@ def locate_dice(image_bgr, debug=False):
     if debug:
         debug_images = {
             "blurred": blurred,
-            # "normalized_channel": normalized_channel,
-            "edges": edges,
-            "grey": grey,
+            "normalized_channel": normalized_channel,
             "threshold": threshold,
             "closed": closed,
             "circled": circled
