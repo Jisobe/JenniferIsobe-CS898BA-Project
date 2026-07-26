@@ -1,3 +1,4 @@
+import copy
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -15,17 +16,17 @@ TRAINING_DATA_DIR = CURRENT_DIR / "data/cropped/train" # Directory where trainin
 VALIDATION_DATA_DIR = CURRENT_DIR / "data/cropped/validation" # Directory where validation data is stored. Should correlate to the value from crop_script.py
 RUN_DATA_DIR = CURRENT_DIR / "runs" # Directory to store models, outputs, plots etc for the runs of different models
 CURR_MODEL_CLASS_DIR = RUN_DATA_DIR / "custom" # Directory to store data and plots from the custom model
-CURRENT_RUN_DIR = CURR_MODEL_CLASS_DIR / "run_19" # Directory to break data into runs
+CURRENT_RUN_DIR = CURR_MODEL_CLASS_DIR / "run_20" # Directory to break data into runs
 PARAMETERS_FILE = CURRENT_RUN_DIR / "hyperparameters.txt"
 BEST_MODEL_FILE = CURRENT_RUN_DIR / "best_model.pt"
 METRICS_FILE = CURRENT_RUN_DIR / "metrics.json"
 TRAINING_CURVES_FILE = CURRENT_RUN_DIR / "training_curves.png"
 
 # Hyperparameters
-LEARNING_RATE = 0.0005 # Tune if saw pattern
-BATCH_SIZE = 64 # Lower if memory becomes an issue.
+LEARNING_RATE = 0.001 # Tune if saw pattern
+BATCH_SIZE = 32 # Lower if memory becomes an issue.
 EPOCHS = 200 # High epoch ceiling to allow early stopping
-DROPOUT_RATE = 0.2 # If under-fitting -> lower. If overfitting -> increase
+DROPOUT_RATE = 0.5 # If under-fitting -> lower. If overfitting -> increase
 PATIENCE = 15 # Patients for early stopping
 IMG_SIZE = 64 # Size of input cropped image. Should correlate to the value from crop_script.py
 NUM_CLASSES = 6 # Configured classes of dice
@@ -78,11 +79,12 @@ class DiceDataset(Dataset):
 #
 training_data_transform = v2.Compose([
     v2.Resize((IMG_SIZE, IMG_SIZE)),
-    v2.RandomRotation(360),     # Add rotation invariance. Allows 360 degrees of rotation of original image
+    v2.RandomRotation(15),     # Add rotation invariance. Allows 360 degrees of rotation of original image
     v2.ColorJitter(            # Add lighting variation simulations
-        brightness=0.3,
-        contrast=0.3,
-        saturation=0.2
+        brightness=0.4,
+        contrast=0,
+        saturation=2,
+        hue=0
     ),
     v2.ToImage(),
     v2.ToDtype(torch.float32, scale=True),
@@ -187,7 +189,7 @@ for epoch in range(EPOCHS):
         best_validation_loss_accuracy = validation_accuracy
         best_validation_loss_training_loss = avg_training_loss
         best_validation_loss_training_accuracy = training_accuracy
-        best_model_weights = model.state_dict().copy()
+        best_model_weights = copy.deepcopy(model.state_dict())
         epochs_no_improve = 0
         torch.save(best_model_weights, BEST_MODEL_FILE)
         print(f"  New best model saved  at {BEST_MODEL_FILE} (val loss: {best_validation_loss:.4f})")

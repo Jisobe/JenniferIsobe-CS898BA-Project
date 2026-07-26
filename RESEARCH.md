@@ -270,4 +270,3 @@ morph_iterations = 1
 ### Knowns
 
 - number of dice: first roll: 5; subsequent rolls: previous roll - kept
--

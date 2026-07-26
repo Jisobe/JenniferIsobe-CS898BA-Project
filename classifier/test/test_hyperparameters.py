@@ -99,7 +99,7 @@ AUGMENTED_TRANSFORM = v2.Compose([
     v2.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.2),
     v2.ToImage(),
     v2.ToDtype(torch.float32, scale=True),
-    v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    v2.Normalize(mean=[0.5096, 0.4681, 0.3996], std=[0.2762, 0.2643, 0.2510])
 ])
 
 ADJUSTED_AUGMENTED_TRANSFORM = v2.Compose([
@@ -108,14 +108,14 @@ ADJUSTED_AUGMENTED_TRANSFORM = v2.Compose([
     v2.ColorJitter(brightness=.4, contrast=0, saturation=2, hue=0),
     v2.ToImage(),
     v2.ToDtype(torch.float32, scale=True),
-    v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    v2.Normalize(mean=[0.5096, 0.4681, 0.3996], std=[0.2762, 0.2643, 0.2510])
 ])
 
 PLAIN_TRANSFORM = v2.Compose([
     v2.Resize((IMG_SIZE, IMG_SIZE)),
     v2.ToImage(),
     v2.ToDtype(torch.float32, scale=True),
-    v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    v2.Normalize(mean=[0.5096, 0.4681, 0.3996], std=[0.2762, 0.2643, 0.2510])
 ])
 
 def train_one_config(config_name, config, epochs, train_loader, val_loader):
@@ -270,8 +270,6 @@ def main():
 
     for config_name in args.configs:
         config = CONFIGS[config_name]
-
-        # train_transform = AUGMENTED_TRANSFORM if config["augment"] else PLAIN_TRANSFORM
         if config["adjust_augment"]:
             train_transform = ADJUSTED_AUGMENTED_TRANSFORM
         elif config["augment"]:
@@ -297,7 +295,6 @@ def main():
     print(f"  {'Config':<20} {'Best Val Loss':>15} {'Epochs Trained':>16}")
     for name, result in all_results.items():
         print(f"  {name:<20} {result['best_val_loss']:>15.4f} {result['epochs_trained']:>16}")
-
 
 if __name__ == "__main__":
     main()

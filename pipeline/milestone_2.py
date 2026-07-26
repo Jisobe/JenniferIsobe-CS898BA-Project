@@ -1,3 +1,4 @@
+# This file was used for the milestone 2 presentation demo and may not be updated with newer functionality
 import argparse
 import sys
 from pathlib import Path
@@ -8,9 +9,9 @@ import torch
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-from locate_dice import locate_dice
-from crop_script import apply_clahe, add_padding
-from cnn_dice_detection_model import DiceClassifier
+from locator.locate_dice import locate_dice
+from locator.crop_script import apply_clahe, add_padding
+from classifier.cnn_dice_detection_model import DiceClassifier
 
 CLASS_NAMES = ["1", "2", "3", "4", "5", "6"]
 IMG_SIZE = 64

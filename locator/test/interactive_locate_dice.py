@@ -1,37 +1,9 @@
-"""
-Interactive tuner for locate_dice.py preprocessing parameters.
-
-USAGE (in a Jupyter notebook cell):
-
-    %matplotlib inline
-    from tune_locate_dice import launch_tuner
-    launch_tuner("data/raw/d6_ - 67.jpeg")
-
-Drag the sliders. Every change re-runs the full pipeline (blur -> CLAHE ->
-Otsu threshold -> morph open/close -> contour filter) on the image and
-redraws all debug stages plus the final boxes, so you can see exactly which
-step breaks on a given photo (e.g. white dice on marble).
-
-When you land on values you like, click "Print constants" (or just read the
-printed block after any slider move) and paste that block directly over the
-constants at the top of locate_dice.py.
-
-Requires: ipywidgets, matplotlib, opencv-python, numpy
-    uv add ipywidgets matplotlib
-"""
-
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 from ipywidgets import (
     interact, FloatSlider, IntSlider, Dropdown, fixed, Layout, ToggleButton
 )
-
-
-# ---------------------------------------------------------------------------
-# Parameterized copy of locate_dice.py's pipeline (kept in sync manually --
-# if you change the real locate_dice.py logic, mirror the change here).
-# ---------------------------------------------------------------------------
 
 def contour_solidity(contour):
     area = cv.contourArea(contour)
@@ -40,7 +12,6 @@ def contour_solidity(contour):
     if hull_area == 0:
         return 0
     return area / hull_area
-
 
 def filter_dice_contours(contours, image_area, min_area_fraction, max_area_fraction,
                           min_aspect_ratio, max_aspect_ratio, min_solidity):
@@ -59,7 +30,6 @@ def filter_dice_contours(contours, image_area, min_area_fraction, max_area_fract
             continue
         boxes.append((x, y, w, h))
     return boxes
-
 
 def locate_dice_tunable(
     image_bgr,
@@ -106,12 +76,11 @@ def locate_dice_tunable(
 
     debug = {
         "blurred": cv.cvtColor(blurred, cv.COLOR_BGR2RGB),
-        "normalized_channel": normalized_channel,
+        # "normalized_channel": normalized_channel,
         "threshold": threshold,
         "closed": closed,
     }
     return boxes, debug
-
 
 def draw_boxes(image_bgr, boxes):
     annotated = image_bgr.copy()
@@ -119,16 +88,7 @@ def draw_boxes(image_bgr, boxes):
         cv.rectangle(annotated, (x, y), (x + w, y + h), (0, 255, 0), 6)
     return cv.cvtColor(annotated, cv.COLOR_BGR2RGB)
 
-
-# ---------------------------------------------------------------------------
-# Widget panel
-# ---------------------------------------------------------------------------
-
 def launch_tuner(image_path, figsize=(16, 9)):
-    """
-    Load an image and display a live slider panel. Call this once per cell;
-    ipywidgets/interact rebuilds the figure on every slider change.
-    """
     image = cv.imread(str(image_path))
     if image is None:
         raise FileNotFoundError(f"Could not read image: {image_path}")
@@ -204,7 +164,6 @@ def launch_tuner(image_path, figsize=(16, 9)):
         min_solidity=FloatSlider(value=0.75, min=0.3, max=1.0, step=0.01, description="min solidity", layout=slider_layout),
         show_final_only=ToggleButton(value=False, description="final only"),
     )
-
 
 if __name__ == "__main__":
     import sys
