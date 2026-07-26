@@ -1,0 +1,191 @@
+{
+  "num_images": 20,
+  "pip_mode": "fallback",
+  "total_ground_truth_dice": 100,
+  "detection_recall": 0.63,
+  "hallucination_rate": 0.25,
+  "mean_matched_iou": 0.8169691620806955,
+  "count_mismatch_rate": 0.35,
+  "per_image": [
+    {
+      "image": "d6_ - 104_jpeg.rf.DevGuHIB2YBZphSPSIU2.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 4,
+      "matched": 4,
+      "missed": 1,
+      "hallucinated": 0,
+      "count_mismatch": true
+    },
+    {
+      "image": "d6_ - 112_jpeg.rf.jMkikButOiVTHyy8ENy5.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 4,
+      "missed": 1,
+      "hallucinated": 1,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 11_jpeg.rf.Wp2qVU0OIWAu5iWSxkQo.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 5,
+      "missed": 0,
+      "hallucinated": 0,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 122_jpeg.rf.APJxsi3oQTL3RaeoWwjF.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 2,
+      "missed": 3,
+      "hallucinated": 3,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 126_jpeg.rf.DD01xOGpqmrONpgSHRIS.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 4,
+      "missed": 1,
+      "hallucinated": 1,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 134_jpeg.rf.tD7hLnPIeHmhQuMz7UPl.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 1,
+      "matched": 0,
+      "missed": 5,
+      "hallucinated": 1,
+      "count_mismatch": true
+    },
+    {
+      "image": "d6_ - 165_jpeg.rf.5sOSx8tnnT0E18ffGDOy.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 1,
+      "missed": 4,
+      "hallucinated": 4,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 171_jpeg.rf.y6djOAubCVeWjeHfqigZ.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 0,
+      "missed": 5,
+      "hallucinated": 5,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 18_jpeg.rf.GIL5Ycbx3ltWEHnhscBW.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 5,
+      "missed": 0,
+      "hallucinated": 0,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 205_jpeg.rf.B9WixT3uB0swSueRHD4B.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 1,
+      "matched": 0,
+      "missed": 5,
+      "hallucinated": 1,
+      "count_mismatch": true
+    },
+    {
+      "image": "d6_ - 210_jpeg.rf.5CHYmuaisTmLO8NgnRHU.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 5,
+      "missed": 0,
+      "hallucinated": 0,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 223_jpeg.rf.cELn4vWmUe59zJdZpwlR.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 5,
+      "missed": 0,
+      "hallucinated": 0,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 226_jpeg.rf.CjXXHeO6pjdHZDmhVTcJ.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 5,
+      "missed": 0,
+      "hallucinated": 0,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 233_jpeg.rf.qhRIRsUjZwBMXRw8yIQI.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 4,
+      "matched": 4,
+      "missed": 1,
+      "hallucinated": 0,
+      "count_mismatch": true
+    },
+    {
+      "image": "d6_ - 236_jpeg.rf.qtMiGjyyEbvA7cr1KFwg.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 5,
+      "missed": 0,
+      "hallucinated": 0,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 238_jpeg.rf.UK8w36fj59UDFOVXPcG3.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 5,
+      "missed": 0,
+      "hallucinated": 0,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 241_jpeg.rf.bF0aNE38XaiDAp6gJ4Wf.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 3,
+      "matched": 3,
+      "missed": 2,
+      "hallucinated": 0,
+      "count_mismatch": true
+    },
+    {
+      "image": "d6_ - 245_jpeg.rf.yBJ4MhrN5f0mkXMPnilf.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 5,
+      "matched": 5,
+      "missed": 0,
+      "hallucinated": 0,
+      "count_mismatch": false
+    },
+    {
+      "image": "d6_ - 256_jpeg.rf.u8a8s9BXNN7h2jHVJPFI.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 3,
+      "matched": 0,
+      "missed": 5,
+      "hallucinated": 3,
+      "count_mismatch": true
+    },
+    {
+      "image": "d6_ - 258_jpeg.rf.DT0j0WHzV9x53uh2IIkY.jpeg",
+      "expected_dice": 5,
+      "detected_boxes": 3,
+      "matched": 1,
+      "missed": 4,
+      "hallucinated": 2,
+      "count_mismatch": true
+    }
+  ]
+}
