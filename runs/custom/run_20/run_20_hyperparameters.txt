@@ -1,0 +1,14 @@
+Initial Hyperparameters
+Learning Rate:.......0.001
+Batch Size:..........32
+Epochs:..............200
+Dropout Rate:........0.5
+Patients:............15
+Image Size:..........64
+Number of classes:...6
+
+Best Model Metrics
+Validation Loss:.......0.2107077735875334
+Validation Accuracy:...94.0
+Training Loss:.........0.39306520128791983
+Training Accuracy:.....85.26466380543634
