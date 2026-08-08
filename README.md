@@ -1,5 +1,7 @@
 # RollCall
 
+The `main` branch contains a more manual/custom approach to localization and classification to avoid using pre-train models. The `yolo` branch contains a approach that relies on a pre-trained YOLO model.
+
 ## Table of Contents
 
 - [Summary](#summary)
