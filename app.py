@@ -21,22 +21,22 @@ MAX_ROLLS_PER_TURN = 3
 st.set_page_config(page_title="RollCall", page_icon="\U0001F3B2", layout="wide")
 
 @st.cache_resource
-def load_pipeline(checkpoint_path: str):
-    return DiceInferencePipeline(checkpoint_path)
+def load_pipeline(weights_path: str):
+    return DiceInferencePipeline(weights_path)
 
 def get_pipeline():
-    checkpoint_path = st.session_state.get("checkpoint_path", "")
-    if not checkpoint_path or not Path(checkpoint_path).exists():
+    weights_path = st.session_state.get("weights_path", "")
+    if not weights_path or not Path(weights_path).exists():
         return None
     try:
-        return load_pipeline(checkpoint_path)
+        return load_pipeline(weights_path)
     except Exception as e:
         st.session_state["pipeline_error"] = str(e)
         return None
 
 def init_state():
     defaults = {
-        "checkpoint_path": "runs/custom/run_20/best_model.pt",
+        "weights_path": "runs/yolo/rollcall/weights/best.pt",
         "scorecard": Scorecard(),
         "dice": [None] * 5,
         "kept": [False] * 5,
@@ -44,7 +44,6 @@ def init_state():
         "rolls_used": 0,
         "last_annotated": None,
         "turn_complete_prompt": False,
-        "turn_id": 0,
     }
     for k, v in defaults.items():
         st.session_state.setdefault(k, v)
@@ -58,30 +57,35 @@ def start_new_turn():
     st.session_state["rolls_used"] = 0
     st.session_state["last_annotated"] = None
     st.session_state["turn_complete_prompt"] = False
-    st.session_state["turn_id"] += 1
 
-def open_slots():
+def open_slots() -> list[int]:
+    """Indices of dice slots that are not marked 'keep' -- these are the
+    ones that get refilled from the next photo."""
     return [i for i, k in enumerate(st.session_state["kept"]) if not k]
 
-def apply_detections_to_slots(detections, slot_indices):
+def apply_detections_to_slots(detections, slot_indices: list[int]):
+    """Fill `slot_indices` (in order) with the faces detected in this photo.
+    If the photo detected a different die count than expected, fill what we
+    can and flag the mismatch rather than guessing."""
     n = min(len(detections), len(slot_indices))
     for i in range(n):
         slot = slot_indices[i]
         st.session_state["dice"][slot] = detections[i].predicted_face
         st.session_state["confidences"][slot] = detections[i].confidence
-        st.session_state.pop(f"manual_{slot}_{st.session_state['turn_id']}", None)
     return len(detections), len(slot_indices)
 
 with st.sidebar:
     st.header("Setup")
-    st.session_state["checkpoint_path"] = st.text_input(
-        "Model checkpoint path", value=st.session_state["checkpoint_path"],
-        help="Path to your trained DiceClassifier weights (.pt)",
+    st.session_state["weights_path"] = st.text_input(
+        "YOLO weights path", value=st.session_state["weights_path"],
+        help="Path to your fine-tuned YOLO weights (.pt), e.g. runs/yolo/<run_name>/weights/best.pt",
     )
     pipeline = get_pipeline()
     if pipeline is None:
         st.warning(
-            "No model loaded yet. Point this at a real checkpoint to run detection, or use manual entry below."
+            "No model loaded yet. Point this at your fine-tuned YOLO weights to run "
+            "detection, or use manual entry below each die to demo the "
+            "rest of the app without one."
         )
 
     st.divider()
@@ -110,7 +114,7 @@ with st.sidebar:
             st.rerun()
 
 st.title("\U0001F3B2 RollCall")
-st.caption("Photograph your dice..RollCall will read them for you!")
+st.caption("Photograph your dice. RollCall reads them for you.")
 
 if st.session_state.get("pipeline_error"):
     st.error(f"Model failed to load: {st.session_state['pipeline_error']}")
@@ -133,18 +137,15 @@ if rolls_used < MAX_ROLLS_PER_TURN:
         if n_expected == 1 else
         f"Photograph the {n_expected} dice you're rerolling"
     )
-    photo_file = st.file_uploader(
-        label, type=["jpg", "jpeg"],
-        key=f"upload_{rolls_used}_{st.session_state['turn_id']}",
-    )
+    photo_file = st.file_uploader(label, type=["jpg", "jpeg"], key=f"upload_{rolls_used}")
 
     if photo_file is not None:
         file_bytes = np.frombuffer(photo_file.read(), np.uint8)
         photo_bgr = cv.imdecode(file_bytes, cv.IMREAD_COLOR)
 
         if pipeline is not None:
-            detections, _ = pipeline.process_photo(
-                photo_bgr, expected_dice_count=len(slots_to_fill), debug=False
+            detections = pipeline.process_photo(
+                photo_bgr, expected_dice_count=len(slots_to_fill)
             )
             n_detected, n_expected = apply_detections_to_slots(detections, slots_to_fill)
             st.session_state["last_annotated"] = cv.cvtColor(
@@ -180,10 +181,9 @@ for i, col in enumerate(cols):
         elif conf is not None:
             st.caption(f"confidence: {conf:.0%}")
 
-        manual_key = f"manual_{i}_{st.session_state['turn_id']}"
         manual = st.selectbox(
             "Correct value", options=["", 1, 2, 3, 4, 5, 6],
-            index=0, key=manual_key, label_visibility="collapsed",
+            index=0, key=f"manual_{i}", label_visibility="collapsed",
         )
         if manual != "":
             st.session_state["dice"][i] = int(manual)
@@ -191,9 +191,8 @@ for i, col in enumerate(cols):
             face = int(manual)
 
         keep_disabled = face is None
-        keep_key = f"keep_{i}_{st.session_state['turn_id']}"
         kept = st.checkbox(
-            "Keep", value=st.session_state["kept"][i], key=keep_key,
+            "Keep", value=st.session_state["kept"][i], key=f"keep_{i}",
             disabled=keep_disabled,
         )
         st.session_state["kept"][i] = kept
