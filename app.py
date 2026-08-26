@@ -36,7 +36,7 @@ def get_pipeline():
 
 def init_state():
     defaults = {
-        "weights_path": "runs/yolo/rollcall/weights/best.pt",
+        "weights_path": "runs/yolo/run_01/weights/best.pt",
         "scorecard": Scorecard(),
         "dice": [None] * 5,
         "kept": [False] * 5,

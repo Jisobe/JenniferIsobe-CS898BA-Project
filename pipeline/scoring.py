@@ -67,7 +67,7 @@ def all_category_scores(dice):
 
 @dataclass
 class Scorecard:
-    entries = field(
+    entries: dict[str, Optional[int]] = field(
         default_factory=lambda: {cat: None for cat in CATEGORIES}
     )
     bonus_yahtzee_count: int = 0

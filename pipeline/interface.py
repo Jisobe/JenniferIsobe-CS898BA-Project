@@ -41,7 +41,16 @@ class DiceInferencePipeline:
         caller (app.py) surfaces the mismatch so the player can fix it via
         manual override.
         """
-        results = self.model.predict(photo_bgr, verbose=False)[0]
+        # end2end=False switches from YOLO26's default NMS-free one-to-one
+        # head to the traditional one-to-many head + NMS post-processing.
+        # The default head is trained to output one clean box per object on
+        # its own, but on this dataset it sometimes still emits duplicate
+        # boxes on the same die (small-object case, likely undertrained) --
+        # iou= has no effect at all on the default path since there's no
+        # NMS step to apply it to. This trades a small amount of latency
+        # and Ultralytics' own ~0.6-0.8 AP for a real duplicate-suppression
+        # knob, which matters more here than raw speed.
+        results = self.model.predict(photo_bgr, verbose=False, end2end=False, iou=0.5)[0]
         names = results.names  # class index -> label string, e.g. {0: "1", ..., 5: "6"}
 
         detections: list[DieDetection] = []
